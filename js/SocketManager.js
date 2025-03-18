@@ -70,8 +70,8 @@ export class SocketManager {
      */
     getServerUrl() {
         // Mặc định sử dụng localhost cho phát triển
-        // return 'https://vuquangduy.online';
-        return 'http://localhost:8004';
+        return 'https://vuquangduy.online';
+        // return 'http://localhost:8004';
     }
     
     /**
@@ -650,7 +650,7 @@ export class SocketManager {
         }
 
         // Có thể sử dụng API hoặc socket event
-        fetch(`http://localhost:8004/api/chatroom/customer/${customerId}/group`)
+        fetch(`https://vuquangduy.online/api/chatroom/customer/${customerId}/group`)
             .then(response => response.json())
             .then(data => {
                 // Dữ liệu đã đúng, trả về nguyên dạng

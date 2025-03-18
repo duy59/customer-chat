@@ -1,0 +1,869 @@
+:root {
+    --primary-color: #4a86e8;
+    --secondary-color: #6aa84f;
+    --text-color: #333333;
+    --light-text: #ffffff;
+    --background-color: #f5f5f5;
+    --border-color: #dddddd;
+    --bubble-size: 60px;
+    --chat-width: 320px;
+    --chat-height: 450px;
+    --header-height: 50px;
+    --footer-height: 60px;
+    --border-radius: 10px;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    font-size: 14px;    
+    line-height: 1.5;
+    color: var(--text-color);
+}
+
+/* Sửa lại CSS cho bong bóng chat */
+.chat-bubble {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #4285f4;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 9;
+    transition: all 0.3s ease;
+}
+
+.chat-bubble i {
+    font-size: 24px;
+    /* Đảm bảo icon được căn giữa hoàn toàn */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Thêm CSS cho thiết bị di động */
+@media (max-width: 768px) {
+    .chat-window {
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        max-height: none;
+        border-radius: 0;
+    }
+    
+    .chat-input {
+        padding: 10px;
+        position: relative;
+        z-index: 10; /* Đảm bảo input luôn hiển thị trên cùng */
+    }
+    
+    .chat-bubble {
+        bottom: 70px; /* Di chuyển bong bóng chat lên trên để không che nút gửi */
+        right: 10px;
+        z-index: 9; /* Đảm bảo bong bóng chat không che phủ input */
+    }
+    
+    /* Đảm bảo khu vực tin nhắn không bị che bởi input */
+    .chat-content {
+        padding-bottom: 60px;
+    }
+} 
+
+/* Notification badge */
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ff4d4f;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Chat Window */
+.chat-window {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 300px;
+    height: 400px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 999;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.chat-window.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Chat Header */
+.chat-header {
+    height: 45px;
+    background-color: #4285f4;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    position: relative;
+}
+
+.chat-header .logo {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.chat-header .title {
+    flex: 1;
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+.chat-header .back-btn,
+.chat-header .close-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 5px;
+}
+
+.chat-header .back-btn {
+    margin-right: 5px;
+}
+
+/* Chat Content */
+.chat-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #f5f5f5;
+}
+
+/* Welcome Screen */
+.welcome-screen {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 10px;
+    background-color: #f5f5f5;
+}
+
+.welcome-message {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 10px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-message h2 {
+    font-size: 1.2rem;
+    color: #4285f4;
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.welcome-message p {
+    color: #666;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.option-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.option-button {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background-color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid #e0e0e0;
+}
+
+.option-button:hover {
+    background-color: #f8f9fa;
+}
+
+.option-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #e8f0fe;
+    color: #4285f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    font-size: 1rem;
+}
+
+.option-text {
+    font-weight: 500;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.logout-button {
+    margin-top: 5px;
+    background-color: #fff;
+}
+
+.logout-button .option-icon {
+    background-color: #fce8e6;
+    color: #ea4335;
+}
+
+.logout-button:hover {
+    background-color: #fef7f6;
+}
+
+/* Registration Form */
+.registration-form {
+    padding: 20px;
+}
+
+.registration-form h2 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.registration-form p {
+    margin-bottom: 20px;
+    color: #666;
+    font-size: 14px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 14px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.submit-btn {
+    width: 100%;
+    background-color: #4a6cf7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #3a5bd9;
+}
+
+/* Messages */
+.messages {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.message {
+    max-width: 70%;
+    padding: 8px 12px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    word-break: break-word;
+    position: relative;
+    font-size: 0.9rem;
+    line-height: 1.3;
+}
+
+.message.customer {
+    align-self: flex-end;
+    background-color: #4285f4;
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.message.admin {
+    align-self: flex-start;
+    background-color: white;
+    color: #333;
+    border-bottom-left-radius: 4px;
+}
+
+.message.system {
+    align-self: center;
+    background-color: #f0f0f0;
+    color: #666;
+    font-style: italic;
+    max-width: 90%;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    padding: 6px 10px;
+}
+
+.message-content-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.message-text {
+    margin-right: 5px;
+}
+
+.time {
+    font-size: 11px;
+    opacity: 0.7;
+    margin-top: 4px;
+    align-self: flex-end;
+}
+
+.message.temp-message {
+    opacity: 0.7;
+}
+
+.message.error {
+    background-color: #fff1f0;
+    border: 1px solid #ff5252;
+}
+
+/* Message content */
+.message-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+}
+
+.message-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.message.customer .message-avatar {
+    right: -30px;
+}
+
+.message.admin .message-avatar {
+    left: -30px;
+}
+
+.message-content {
+    margin-left: 0;
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3px;
+    font-size: 0.7rem;
+}
+
+.sender-name {
+    font-size: 12px;
+    margin-bottom: 4px;
+    font-weight: 500;
+    color: #555;
+}
+
+.message-text {
+    line-height: 1.3;
+}
+
+/* System message */
+.system-message {
+    display: flex;
+    align-items: center;
+}
+
+.system-icon {
+    margin-right: 8px;
+    color: #999;
+}
+
+.system-content {
+    flex: 1;
+}
+
+/* File message */
+.file-message {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+    padding: 8px;
+    margin-top: 5px;
+}
+
+.file-icon {
+    font-size: 24px;
+    margin-right: 10px;
+    color: #666;
+}
+
+.file-info {
+    flex: 1;
+}
+
+.file-name {
+    font-weight: bold;
+    margin-bottom: 2px;
+    font-size: 14px;
+}
+
+.file-size {
+    font-size: 12px;
+    color: #999;
+}
+
+.file-download {
+    color: #4a6cf7;
+    font-size: 18px;
+    padding: 5px;
+}
+
+.image-preview {
+    margin-top: 10px;
+}
+
+.image-preview img {
+    max-width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Chat Input */
+.chat-input {
+    height: 50px;
+    border-top: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    background-color: white;
+}
+
+.attachment-btn {
+    cursor: pointer;
+    margin-right: 8px;
+    color: #999;
+    font-size: 16px;
+}
+
+.attachment-btn:hover {
+    color: #4285f4;
+}
+
+.attachment-btn input[type="file"] {
+    display: none;
+}
+
+.chat-input input[type="text"] {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 8px 0;
+    font-size: 0.9rem;
+}
+
+.chat-input button {
+    background: none;
+    border: none;
+    color: #4285f4;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+    margin-left: 8px;
+}
+
+/* Room selection */
+.room-selection {
+    padding: 20px;
+}
+
+.room-selection h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.room-tabs {
+    display: flex;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    color: #666;
+    font-weight: bold;
+    position: relative;
+}
+
+.tab-btn.active {
+    color: #4a6cf7;
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #4a6cf7;
+}
+
+.room-list {
+    display: none;
+}
+
+.room-list.active {
+    display: block;
+}
+
+.room-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.room-info {
+    flex: 1;
+}
+
+.room-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.room-description {
+    font-size: 12px;
+    color: #666;
+}
+
+.unread-badge {
+    background-color: #ff4d4f;
+    color: white;
+    border-radius: 10px;
+    padding: 2px 8px;
+    font-size: 12px;
+    margin-right: 10px;
+}
+
+.join-btn {
+    background-color: #4a6cf7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.empty-list {
+    text-align: center;
+    padding: 20px;
+    color: #999;
+    font-style: italic;
+}
+
+.direct-chat-btn {
+    width: 100%;
+    background-color: #52c41a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+/* Image modal */
+.image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.close-modal {
+    position: absolute;
+    top: -30px;
+    right: 0;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modal-content img {
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: 5px;
+}
+
+/* Notification */
+.notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.notification {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: transform 0.3s, opacity 0.3s;
+    min-width: 300px;
+}
+
+.notification.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.notification.info {
+    background-color: #e6f7ff;
+    border-left: 4px solid #1890ff;
+    color: #1890ff;
+}
+
+.notification.success {
+    background-color: #f6ffed;
+    border-left: 4px solid #52c41a;
+    color: #52c41a;
+}
+
+.notification.error {
+    background-color: #fff1f0;
+    border-left: 4px solid #f5222d;
+    color: #f5222d;
+}
+
+.notification.warning {
+    background-color: #fffbe6;
+    border-left: 4px solid #faad14;
+    color: #faad14;
+}
+
+.notification-icon {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.notification-content {
+    flex: 1;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .chat-window {
+        width: 100%;
+        height: 100%;
+        bottom: 0;
+        right: 0;
+        border-radius: 0;
+    }
+    
+    .chat-bubble {
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    .notification {
+        min-width: auto;
+        width: calc(100% - 40px);
+    }
+}
+
+/* Kiểu cho avatar mặc định */
+.sender-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.sender-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-initial {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Kiểu cho tên người gửi */
+.sender-name {
+    font-size: 12px;
+    margin-bottom: 4px;
+    font-weight: 500;
+    color: #555;
+}
+
+/* Kiểu cho tin nhắn của người khác */
+.message.other {
+    align-self: flex-start;
+    background-color: #e1ffc7; /* Màu mặc định, có thể được ghi đè bởi chatConfig */
+    color: #333;
+    border-radius: 18px 18px 18px 0;
+    margin-left: 8px;
+    max-width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Kiểu cho tin nhắn hệ thống */
+.message.system {
+    align-self: center;
+    background-color: #f8f9fa;
+    color: #666;
+    border-radius: 16px;
+    font-style: italic;
+    padding: 6px 12px;
+    margin: 8px 0;
+    font-size: 0.85rem;
+    border: 1px solid #e0e0e0;
+    max-width: 80%;
+}
+
+/* Điều chỉnh kiểu cho tin nhắn của người dùng hiện tại */
+.message.customer {
+    align-self: flex-end;
+    background-color: #4285f4;
+    color: white;
+    border-radius: 18px 18px 0 18px;
+    margin-right: 8px;
+}
+
+/* Điều chỉnh container tin nhắn */
+.messages {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+/* Điều chỉnh container nội dung tin nhắn */
+.message-content-container {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Điều chỉnh thời gian */
+.time {
+    font-size: 11px;
+    opacity: 0.7;
+    margin-top: 4px;
+    align-self: flex-end;
+}
+
+/* Điều chỉnh tin nhắn tạm thời */
+.message.temp-message {
+    opacity: 0.7;
+}
+
+/* Điều chỉnh tin nhắn lỗi */
+.message.error {
+    border: 1px solid #ff5252;
+}

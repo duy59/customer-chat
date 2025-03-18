@@ -1,0 +1,595 @@
+/* Điều chỉnh vị trí bong bóng chat trên thiết bị di động */
+@media (max-width: 768px) {
+    .chat-bubble {
+        bottom: 80px !important; /* Đẩy bong bóng chat lên cao hơn */
+        right: 10px !important;
+        width: 50px !important; /* Làm bong bóng nhỏ hơn trên mobile */
+        height: 50px !important;
+    }
+    
+    .chat-bubble i {
+        font-size: 20px !important; /* Icon nhỏ hơn */
+    }
+    
+    /* Đảm bảo nút gửi luôn hiển thị */
+    .chat-input {
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        z-index: 1000 !important;
+        background-color: white !important;
+        border-top: 1px solid #eee !important;
+    }
+    
+    /* Đảm bảo khu vực tin nhắn không bị che bởi input */
+    .chat-content {
+        padding-bottom: 60px !important;
+        margin-bottom: 10px !important;
+    }
+    
+    /* Đảm bảo icon trong bong bóng chat được căn giữa */
+    .chat-bubble i {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+        height: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+} 
+
+/* CSS cho phòng chat nhóm */
+.group-rooms {
+    padding: 10px 15px;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.group-rooms-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
+}
+
+.group-rooms-header h2 {
+    margin: 0;
+    color: #333;
+    font-size: 1.5rem;
+}
+
+/* Nút tạo phòng chat mới */
+.create-group-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin: 10px 0 15px 0;
+    align-self: flex-start;
+}
+
+.create-group-btn:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.create-group-btn i {
+    font-size: 14px;
+}
+
+/* Danh sách phòng chat */
+.room-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.room-item {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    padding: 15px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e0e0e0;
+}
+
+.room-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.room-info {
+    flex: 1;
+}
+
+.room-info h3 {
+    margin: 0 0 8px 0;
+    color: #333;
+    font-size: 18px;
+}
+
+.room-info p {
+    margin: 0 0 15px 0;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.room-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    font-size: 13px;
+    color: #777;
+}
+
+.user-count {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.user-count i {
+    color: #666;
+}
+
+.room-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+}
+
+.join-btn {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.join-btn:hover {
+    background-color: #0b7dda;
+    transform: translateY(-2px);
+}
+
+/* Form tạo phòng chat */
+.create-group-form {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.create-group-form h2 {
+    margin: 0 0 20px 0;
+    color: #333;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #555;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #2196F3;
+    outline: none;
+}
+
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.form-actions button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-actions .cancel-btn {
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+.form-actions .cancel-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.form-actions .submit-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.form-actions .submit-btn:hover {
+    background-color: #45a049;
+}
+
+/* Giao diện phòng chat nhóm */
+.chat-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #2196F3;
+    color: white;
+    border-radius: 8px 8px 0 0;
+}
+
+.chat-header .back-btn {
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.chat-header .room-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0; /* Để ellipsis hoạt động */
+}
+
+.chat-header .room-name {
+    font-weight: bold;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chat-header .user-count {
+    font-size: 12px;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 2px;
+}
+
+.chat-header .user-count i {
+    font-size: 12px;
+}
+
+.chat-header .actions {
+    display: flex;
+    gap: 10px;
+    margin-left: 10px;
+}
+
+.chat-header .actions button {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.chat-header .actions button:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Danh sách thành viên */
+.members-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.members-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    background-color: #f9f9f9;
+    z-index: 1;
+}
+
+.members-header h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.members-header .close-btn {
+    background: none;
+    border: none;
+    color: #777;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.members-header .close-btn:hover {
+    color: #333;
+}
+
+.members-list {
+    padding: 10px;
+}
+
+.user-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.user-item:hover {
+    background-color: #f5f5f5;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-placeholder {
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+}
+
+.user-details {
+    flex: 1;
+}
+
+.user-name {
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 2px;
+}
+
+.user-email {
+    font-size: 12px;
+    color: #777;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .room-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .create-group-form {
+        padding: 15px;
+    }
+    
+    .chat-header {
+        padding: 8px 10px;
+    }
+    
+    .chat-header .title {
+        font-size: 14px;
+    }
+    
+    .chat-header .room-name {
+        font-size: 13px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 120px;
+    }
+} 
+
+/* Ẩn tin nhắn hệ thống trong phòng chat nhóm */
+.group-chat .message.system {
+    display: none;
+} 
+
+/* Zoom Group Chat */
+.zoom-group-chat.message.system {
+    display: none;
+}
+
+.zoom-group-chat {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    overflow-y: auto;
+    height: calc(100% - 60px);
+}
+
+.zoom-group-chat .message {
+    display: flex;
+    margin-bottom: 10px;
+    max-width: 80%;
+    position: relative;
+}
+
+.zoom-group-chat .message.customer {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.zoom-group-chat .message.other {
+    align-self: flex-start;
+}
+
+.zoom-group-chat .message.system {
+    align-self: center;
+    max-width: 90%;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    padding: 5px 10px;
+    font-size: 12px;
+    color: #666;
+    margin: 5px 0;
+    text-align: center;
+    display: none; /* Ẩn tin nhắn hệ thống */
+}
+
+.zoom-group-chat .sender-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e0e0e0;
+}
+
+.zoom-group-chat .sender-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.zoom-group-chat .avatar-initial {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+}
+
+.zoom-group-chat .message-content-container {
+    background-color: #f1f0f0;
+    border-radius: 8px;
+    padding: 8px 12px;
+    position: relative;
+    max-width: calc(100% - 50px);
+}
+
+.zoom-group-chat .message.customer .message-content-container {
+    background-color: #dcf8c6;
+}
+
+.zoom-group-chat .sender-name {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 2px;
+    color: #555;
+}
+
+.zoom-group-chat .message-text {
+    font-size: 14px;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.zoom-group-chat .time {
+    font-size: 10px;
+    color: #999;
+    margin-left: 5px;
+    white-space: nowrap;
+    float: right;
+    margin-top: 2px;
+}
+
+.zoom-group-chat .message.temp-message {
+    opacity: 0.7;
+}
+
+.zoom-group-chat .message.failed {
+    opacity: 0.5;
+}
+
+.zoom-group-chat .error-icon {
+    position: absolute;
+    right: -15px;
+    bottom: 0;
+    color: #f44336;
+    font-size: 16px;
+}
+
+.zoom-group-chat .message.customer .error-icon {
+    left: -15px;
+    right: auto;
+}
+
+/* Responsive styles for Zoom Group Chat */
+@media (max-width: 768px) {
+    .zoom-group-chat .message {
+        max-width: 90%;
+    }
+} 
+
+/* Định dạng cho ID khách hàng trên màn hình chào mừng */
+.welcome-message .customer-id {
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #666;
+    background-color: #f5f5f5;
+    padding: 8px 12px;
+    border-radius: 4px;
+    display: inline-block;
+} 

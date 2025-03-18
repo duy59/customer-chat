@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Customer Chat</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Socket.IO -->
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="customer.css">
+    <link rel="stylesheet" href="css/public-chat.css">
+    <link rel="stylesheet" href="css/customer.css">
+
+    <!-- Cấu hình màu sắc cho tin nhắn -->
+    <script>
+        // Cấu hình màu sắc cho tin nhắn của đối phương
+        window.chatConfig = {
+            otherMessageBgColor: '#e1ffc7', // Màu nền tin nhắn đối phương (xanh lá nhạt)
+            otherMessageTextColor: '#333333'  // Màu chữ tin nhắn đối phương (đen)
+        };
+    </script>
+
+    <!-- Custom JavaScript (type="module" để sử dụng ES modules) -->
+    <script type="module" src="js/main.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        h1 {
+            color: #333;
+        }
+        
+        /* CSS cho nút tham gia phòng chat công khai */
+        .welcome-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .welcome-buttons button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .start-chat-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .start-chat-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .public-chat-btn {
+            background-color: #2196F3;
+            color: white;
+        }
+        
+        .public-chat-btn:hover {
+            background-color: #0b7dda;
+        }
+    </style>
+</head>
+<body>
+    <!-- Chat container -->
+    <div id="chat-container"></div>
+    
+    <!-- API key -->
+    <input type="hidden" id="api-key" value="your_api_key_here">
+    
+    <!-- Nội dung trang web -->
+    <div class="content">
+        <h1>Test Customer Chat</h1>
+        <p>Đây là trang test để kiểm tra tính năng chat. Bạn có thể nhấp vào biểu tượng chat ở góc dưới bên phải để bắt đầu trò chuyện.</p>
+    </div>
+</body>
+</html> 

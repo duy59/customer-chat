@@ -70,8 +70,8 @@ export class SocketManager {
      */
     getServerUrl() {
         // Mặc định sử dụng localhost cho phát triển
-        return 'https://vuquangduy.online';
-        // return 'http://localhost:8080';
+        // return 'https://vuquangduy.online';
+        return 'http://localhost:8004';
     }
     
     /**
@@ -365,6 +365,7 @@ export class SocketManager {
         
         this.emit('join_public_room', { room_id: roomId }, (response) => {
             if (response && response.success) {
+                console.log('Tham gia phòng chat công khai thành công:', response);
                 callback(response);
             } else {
                 console.error('Tham gia phòng chat công khai thất bại:', response ? response.error : 'Không có phản hồi');
@@ -649,7 +650,7 @@ export class SocketManager {
         }
 
         // Có thể sử dụng API hoặc socket event
-        fetch(`https://vuquangduy.online/api/chatroom/customer/${customerId}/group`)
+        fetch(`http://localhost:8004/api/chatroom/customer/${customerId}/group`)
             .then(response => response.json())
             .then(data => {
                 // Dữ liệu đã đúng, trả về nguyên dạng

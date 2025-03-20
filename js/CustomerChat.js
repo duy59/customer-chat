@@ -488,6 +488,7 @@ export class CustomerChat {
      */
     joinChatRoom(roomId) {
         this.socket.emit('join_room', { roomId }, (response) => {
+            
             if (response.success) {
                 this.currentRoomId = roomId;
                 
@@ -534,6 +535,8 @@ export class CustomerChat {
             // Gửi tin nhắn trong phòng chat công khai
             this.sendPublicMessageWithText(message);
         } else {
+
+            console.log('gửi tin nhắn trong phòng chat trực tiếp');
         // Tạo ID tạm thời cho tin nhắn
         const tempId = 'temp-' + Date.now();
         
@@ -1503,7 +1506,7 @@ export class CustomerChat {
         // Gửi yêu cầu lấy lịch sử chat
         this.socket.emit('get_chat_history', { roomId }, (response) => {
             if (response && response.success) {
-                console.log('Lịch sử chat:', response.messages);
+                // console.log('Lịch sử chat:', response.messages);
                 
                 // Sắp xếp tin nhắn theo thời gian tạo
                 const messages = response.messages.sort((a, b) => {
@@ -1512,7 +1515,7 @@ export class CustomerChat {
                 
                 // Hiển thị tin nhắn
                 messages.forEach(message => {
-                    console.log('Tin nhắn:', message);
+                    // console.log('Tin nhắn:', message);
                     
                     // Hiển thị tin nhắn
                     this.messageManager.displayMessage(message);

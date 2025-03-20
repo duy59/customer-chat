@@ -118,7 +118,7 @@ export class SocketManager {
         
         // Sự kiện nhận tin nhắn mới
         this.socket.on('new_message', (message) => {
-            console.log('Nhận sự kiện new_message từ server:', message);
+            // console.log('Nhận sự kiện new_message từ server:', message);
             
             // Đảm bảo tin nhắn có đủ thông tin cần thiết
             if (!message.id) {
@@ -365,7 +365,7 @@ export class SocketManager {
         
         this.emit('join_public_room', { room_id: roomId }, (response) => {
             if (response && response.success) {
-                console.log('Tham gia phòng chat công khai thành công:', response);
+                // console.log('Tham gia phòng chat công khai thành công:', response);
                 callback(response);
             } else {
                 console.error('Tham gia phòng chat công khai thất bại:', response ? response.error : 'Không có phản hồi');
@@ -405,7 +405,7 @@ export class SocketManager {
     sendPublicMessage(messageObj, callback) {
         
         this.emit('send_public_message', messageObj, (response) => {
-            console.log('response gửi tin nhắn trong phòng chat công khai : ', response);
+            // console.log('response gửi tin nhắn trong phòng chat công khai : ', response);
             if (response && response.success) {
                 
                 // Lưu ID tin nhắn đã gửi vào cả hai Set để ngăn hiển thị lại
@@ -430,7 +430,7 @@ export class SocketManager {
      * @param {object} message - Tin nhắn mới nhận từ server
      */
     handleNewMessage(message) {
-        console.log('Nhận tin nhắn mới:', message);
+        // console.log('Nhận tin nhắn mới:', message);
         
         // Kiểm tra xem tin nhắn có ID không
         if (!message.id) {
@@ -440,7 +440,7 @@ export class SocketManager {
         
         // Kiểm tra xem tin nhắn đã được hiển thị chưa
         if (this.chatApp.messageManager.displayedMessageIds.has(message.id)) {
-            console.log('Tin nhắn đã được hiển thị trước đó, bỏ qua:', message.id);
+                // console.log('Tin nhắn đã được hiển thị trước đó, bỏ qua:', message.id);
             return;
         }
         
@@ -453,7 +453,7 @@ export class SocketManager {
         const existsInDOM = messagesContainer.querySelector(`.message[data-id="${message.id}"]`);
         
         if (existsInDOM) {
-            console.log('Tin nhắn đã tồn tại trong DOM, bỏ qua:', message.id);
+            // console.log('Tin nhắn đã tồn tại trong DOM, bỏ qua:', message.id);
             return;
         }
         
@@ -473,18 +473,18 @@ export class SocketManager {
                 this.sentMessageIds.add(message.id);
                 this.chatApp.messageManager.displayedMessageIds.add(message.id);
                 
-                console.log('Đã cập nhật tin nhắn tạm thời thành tin nhắn thật:', message.id);
+                // console.log('Đã cập nhật tin nhắn tạm thời thành tin nhắn thật:', message.id);
                 return;
             }
         }
         
         // Nếu tin nhắn thuộc phòng chat hiện tại, hiển thị ngay lập tức
         if (isInCurrentRoom) {
-            console.log('Hiển thị tin nhắn mới trong phòng hiện tại:', message.id);
+            // console.log('Hiển thị tin nhắn mới trong phòng hiện tại:', message.id);
             this.chatApp.messageManager.handleNewMessage(message);
         } else {
             // Nếu không thuộc phòng chat hiện tại, tăng số tin nhắn chưa đọc
-            console.log('Tin nhắn không thuộc phòng hiện tại, tăng số tin nhắn chưa đọc:', message.id);
+            // console.log('Tin nhắn không thuộc phòng hiện tại, tăng số tin nhắn chưa đọc:', message.id);
             if (message.roomId || message.room_id) {
                 this.chatApp.increaseUnreadCount(message.roomId || message.room_id);
             }
@@ -655,7 +655,7 @@ export class SocketManager {
             .then(data => {
                 // Dữ liệu đã đúng, trả về nguyên dạng
                 if (callback) callback(data);
-                console.log('data lấy danh sách phòng chat nhóm đã tham gia : ', data);
+                // console.log('data lấy danh sách phòng chat nhóm đã tham gia : ', data);
             })
             .catch(error => {
                 
@@ -686,9 +686,9 @@ export class SocketManager {
             return;
         }
 
-        console.log('Joining group room:', roomId);
+        // console.log('Joining group room:', roomId);
         this.socket.emit('join_zoom_group', { room_id: roomId }, (response) => {
-            console.log('Join group room response:', response);
+            // console.log('Join group room response:', response);
             if (callback) callback(response);
         });
     }
@@ -705,10 +705,10 @@ export class SocketManager {
             return;
         }
 
-        console.log('Gửi tin nhắn trong phòng chat nhóm:', messageObj);
+        // console.log('Gửi tin nhắn trong phòng chat nhóm:', messageObj);
         
         this.socket.emit('send_group_message', messageObj, (response) => {
-            console.log('Phản hồi gửi tin nhắn trong phòng chat nhóm:', response);
+            // console.log('Phản hồi gửi tin nhắn trong phòng chat nhóm:', response);
             
             if (response && response.success) {
                 // Lưu ID tin nhắn đã gửi vào cả hai Set để ngăn hiển thị lại

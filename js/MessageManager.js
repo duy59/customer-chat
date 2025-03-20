@@ -92,7 +92,7 @@ export class MessageManager {
      * Hiển thị tin nhắn
      */
     displayMessage(message) {
-        console.log('displayMessage:', message);
+        
         // Kiểm tra xem tin nhắn đã tồn tại trong DOM chưa
         const messagesContainer = this.getOrCreateMessagesContainer();
         if (message.id && !message.isTemp) {
@@ -311,9 +311,6 @@ export class MessageManager {
             message.sender_name = this.chatApp.customerInfo?.name || 'Bạn';
         }
         
-        // Hiển thị tin nhắn
-        console.log('Hiển thị tin nhắn mới:', message.id);
-        this.displayMessage(message);
         
         // Nếu không phải tin nhắn từ khách hàng hiện tại và không đang xem phòng chat, tăng số tin nhắn chưa đọc
         if (!isFromCurrentCustomer && 

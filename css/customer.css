@@ -447,9 +447,9 @@
 } 
 
 /* Ẩn tin nhắn hệ thống trong phòng chat nhóm */
-.group-chat .message.system {
+/* .group-chat .message.system {
     display: none;
-} 
+}  */
 
 /* Zoom Group Chat */
 .zoom-group-chat.message.system {

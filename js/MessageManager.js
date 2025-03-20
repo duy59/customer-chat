@@ -92,6 +92,7 @@ export class MessageManager {
      * Hiển thị tin nhắn
      */
     displayMessage(message) {
+        console.log('displayMessage:', message);
         // Kiểm tra xem tin nhắn đã tồn tại trong DOM chưa
         const messagesContainer = this.getOrCreateMessagesContainer();
         if (message.id && !message.isTemp) {

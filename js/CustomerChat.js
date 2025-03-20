@@ -1503,7 +1503,7 @@ export class CustomerChat {
         // Gửi yêu cầu lấy lịch sử chat
         this.socket.emit('get_chat_history', { roomId }, (response) => {
             if (response && response.success) {
-                // console.log('Lịch sử chat:', response.messages);
+                console.log('Lịch sử chat:', response.messages);
                 
                 // Sắp xếp tin nhắn theo thời gian tạo
                 const messages = response.messages.sort((a, b) => {
@@ -1512,10 +1512,7 @@ export class CustomerChat {
                 
                 // Hiển thị tin nhắn
                 messages.forEach(message => {
-                    // Bỏ qua tin nhắn hệ thống nếu đang ở phòng chat Zoom
-                    if (this.currentView === 'zoom-group-chat' && message.sender_type === 'system') {
-                        return;
-                    }
+                    console.log('Tin nhắn:', message);
                     
                     // Hiển thị tin nhắn
                     this.messageManager.displayMessage(message);

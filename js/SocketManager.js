@@ -71,7 +71,7 @@ export class SocketManager {
     getServerUrl() {
         // Mặc định sử dụng localhost cho phát triển
         return 'https://vuquangduy.online';
-        // return 'http://localhost:8004';
+        // return 'http://localhost:8080';
     }
     
     /**

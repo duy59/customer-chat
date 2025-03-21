@@ -1154,7 +1154,9 @@ export class CustomerChat {
         this.socket.createGroupChat({
             name: name,
             description: description || '',
-            customerId: this.customerId
+            customerId: this.customerId,
+            domain_api_key: this.apiKey,
+            domain_url: window.location.hostname
         }, (response) => {
             if (response && response.success) {
                 // Hiển thị thông báo thành công

@@ -396,7 +396,9 @@ export class UIManager {
                 name,
                 email,
                 phone,
-                nextAction
+                nextAction,
+                domain_api_key: this.chatApp.apiKey,
+                domain_url: window.location.hostname
             });
         });
         

@@ -46,6 +46,11 @@ export class SocketManager {
         try {
             // Lấy URL server từ API key
             const serverUrl = this.getServerUrl();
+
+            console.log('serverUrl', serverUrl);
+            console.log("đang kết nối với server")
+            console.log('this.chatApp.apiKey', this.chatApp.apiKey);
+            console.log('window.location.hostname', window.location.hostname);
             
             // Tạo kết nối socket
             this.socket = io(serverUrl, {
@@ -220,8 +225,8 @@ export class SocketManager {
         // Gửi thông tin khách hàng để kết nối lại
         this.emit('customer_reconnect', {
             customerId: this.chatApp.customerId,
-            api_key: this.chatApp.apiKey,
-            domain: window.location.hostname
+            domain_api_key: this.chatApp.apiKey,
+            domain_url: window.location.hostname
         }, (response) => {
             if (response && response.success) {
                 

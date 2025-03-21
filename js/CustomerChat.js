@@ -150,6 +150,7 @@ export class CustomerChat {
      * Đăng ký thông tin khách hàng
      */
     registerCustomer(info) {
+        console.log("info", info);
         // Kiểm tra kết nối và thử kết nối lại nếu cần
         if (!this.isConnected) {
             
@@ -227,7 +228,8 @@ export class CustomerChat {
         // Cập nhật thông tin khách hàng
         const updateData = {
             customerId: this.customerId,
-            domain: window.location.hostname, // Thêm thông tin domain hiện tại
+            domain_api_key: this.apiKey,
+            domain_url: window.location.hostname,
             ...info
         };
         
@@ -311,7 +313,9 @@ export class CustomerChat {
         
         // Gửi yêu cầu tham gia phòng chat trực tiếp
         this.socket.emit('join_direct_chat', {
-            customerId: this.customerId
+            customerId: this.customerId,
+            domain_api_key: this.apiKey,
+            domain_url: window.location.hostname
         }, (response) => {
             if (response && response.success) {
                 this.currentRoomId = response.roomId;

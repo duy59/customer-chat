@@ -411,7 +411,7 @@ export class CustomerChat {
         messagesContainer.appendChild(loadingIndicator);
         
         // Gọi API để lấy lịch sử chat
-        fetch(`https://vuquangduy.online/api/message/room/${roomId}`, {
+        fetch(`DOMAINAPI/api/message/room/${roomId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

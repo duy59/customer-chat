@@ -75,7 +75,7 @@ export class SocketManager {
      */
     getServerUrl() {
         // Mặc định sử dụng localhost cho phát triển
-        return 'https://vuquangduy.online';
+        return 'DOMAINAPI';
         // return 'http://localhost:8080';
     }
     
@@ -576,7 +576,7 @@ export class SocketManager {
 
         console.log('Checking user ID:', userId);
         // Sử dụng API để kiểm tra ID người dùng
-        fetch(`https://vuquangduy.online/api/customer/check/${userId}`)
+        fetch(`DOMAINAPI/api/customer/check/${userId}`)
             .then(response => response.json())
             .then(data => {
                 console.log('Check user ID response:', data);
@@ -655,7 +655,7 @@ export class SocketManager {
         }
 
         // Có thể sử dụng API hoặc socket event
-        fetch(`https://vuquangduy.online/api/chatroom/customer/${customerId}/group`)
+        fetch(`DOMAINAPI/api/chatroom/customer/${customerId}/group`)
             .then(response => response.json())
             .then(data => {
                 // Dữ liệu đã đúng, trả về nguyên dạng
